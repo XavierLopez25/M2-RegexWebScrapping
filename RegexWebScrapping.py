@@ -21,10 +21,10 @@ def procesar_buffer(entrada, tamano_buffer):
         inicio_buffer += tamano_buffer
 
 def extraer_productos(html):
-    regex_nombre = r"<h4>(.*?)</h4>"
-    regex_imagen = r"<img src=\"(.*?)\" alt=\"product-image\""
-    nombres = re.findall(regex_nombre, html)
-    imagenes = re.findall(regex_imagen, html)
+    regex_nombre = r'<div class="right-block title-block">.*?<h4><a.*?>(.*?)</a></h4>'
+    regex_imagen = r'<div class="item-img thumb-active" data-src="(.*?)">'
+    nombres = re.findall(regex_nombre, html, re.DOTALL)
+    imagenes = re.findall(regex_imagen, html, re.DOTALL)
     return zip(nombres, imagenes)
 
 def exportar_csv(productos, archivo_salida):
